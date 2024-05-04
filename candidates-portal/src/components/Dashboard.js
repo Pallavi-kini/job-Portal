@@ -4,8 +4,10 @@ import logo from "../Assets/logoc.jpg";
 import "./Dashboard.css";
 import Filter from "./Filter";
 import CircularProgress from "@mui/material/CircularProgress";
+import { useNavigate } from "react-router-dom";
 
 const Dashboard = () => {
+  const navigate = useNavigate();
   const [jobData, setjobData] = useState([]);
   const [page, setPage] = useState(1);
   const [showFilter, setshowFilter] = useState(false);
@@ -57,10 +59,13 @@ const Dashboard = () => {
   useEffect(() => {
     limit = limit * page;
     fetchApiData();
+    handleSubmit();
   }, [page]);
 
   const displayFilter = () => {
+    // console.log("hii");
     setshowFilter(!showFilter);
+    // console.log(showFilter);
   };
 
   const handleInputChange = (data) => {
@@ -71,21 +76,69 @@ const Dashboard = () => {
     }));
   };
 
+  // const handleSubmit = () => {
+  //   console.log(jobData);
+  //   const filteredJobs = jobData.filter((job) => {
+  //     return (
+  //       // job.minExp >= filter.experience ||
+  //       job.companyName.toLowerCase() === filter.companyName.toLowerCase() ||
+  //       job.location.toLowerCase() === filter.location.toLowerCase()
+  //       // job.role.toLowerCase().includes(filter.role.toLowerCase())
+  //     );
+  //   });
+  //   console.log(filteredJobs);
+  //   const originalData = jobData;
+  //   if (filteredJobs.length > 0) {
+  //     setjobData(filteredJobs);
+  //   } else {
+  //     setjobData(originalData);
+  //   }
+  //   // if (filteredJobs == []) {
+  //   //   console.log("hh");
+  //   //   setjobData(originalData);
+  //   // } else {
+  //   //   setjobData(filteredJobs);
+  //   // }
+  //   setshowFilter(false);
+
+  //   // setfilter(filteredJobs);
+  // };
+
   const handleSubmit = () => {
-    console.log(jobData);
     const filteredJobs = jobData.filter((job) => {
-      // return (
-      //   job.minExp >= filter.experience &&
-      //   job.companyName
-      //     .toLowerCase()
-      //     .includes(filter.companyName.toLowerCase()) &&
-      //   job.location.toLowerCase().includes(filter.location.toLowerCase()) &&
-      //   job.techStack.toLowerCase().includes(filter.techStack.toLowerCase()) &&
-      //   job.role.toLowerCase().includes(filter.role.toLowerCase()) &&
-      //   job.basePay >= filter.minBasePay
-      // );
+      // Check if filter values are provided
+      const filterCompanyName =
+        filter.companyName && filter.companyName.toLowerCase();
+      const filterLocation = filter.location && filter.location.toLowerCase();
+      const filterRole = filter.role && filter.role.toLowerCase();
+      const filterExperience =
+        filter.experience !== undefined ? filter.experience : null;
+
+      // Check if filter values match job properties, or if filter value is not provided
+      const companyNameMatch =
+        !filterCompanyName ||
+        job.companyName.toLowerCase() === filterCompanyName;
+      const locationMatch =
+        !filterLocation || job.location.toLowerCase() === filterLocation;
+      const roleMatch = !filterRole || job.jobRole.toLowerCase() === filterRole;
+      const experienceMatch =
+        filterExperience === null || job.minExp >= filterExperience;
+
+      // Include the job only if all conditions match
+      return companyNameMatch && locationMatch && roleMatch && experienceMatch;
     });
-    setfilter(filteredJobs);
+    console.log(filteredJobs);
+    setjobData(filteredJobs);
+    if (filteredJobs.length > 0) {
+      setjobData(filteredJobs);
+    } else {
+      fetchApiData();
+    }
+    setshowFilter(false);
+  };
+
+  const routeToPage = () => {
+    navigate("company");
   };
 
   return (
@@ -163,7 +216,12 @@ const Dashboard = () => {
                           {item.jobDetailsFromCompany}
                         </div>
                         <div className="content overlay">
-                          <span style={{ cursor: "pointer" }}>View Job</span>
+                          <span
+                            style={{ cursor: "pointer" }}
+                            onClick={routeToPage}
+                          >
+                            View Job
+                          </span>
                         </div>
                       </div>
                     </div>
