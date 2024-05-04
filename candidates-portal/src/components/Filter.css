@@ -1,0 +1,29 @@
+.filter {
+  width: 442px;
+  height: 274px;
+  background-color: aqua;
+}
+
+.form {
+  display: grid;
+  grid-template-columns: [t1] 50% [t2] 50%;
+}
+
+.input {
+  padding: 7px;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: none;
+  outline: none;
+}
+
+.btn-click {
+  width: 93%;
+  padding: 10px;
+  border-radius: 7px;
+  margin-top: 10px;
+}
+
+.filter-container {
+  padding: 10px;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import logo from "../Assets/logoc.png";
 import "./Dashboard.css";
+import Filter from "./Filter";
 
 const Dashboard = () => {
   const [jobData, setjobData] = useState([]);
@@ -70,7 +71,7 @@ const Dashboard = () => {
           <span>Filter</span>
         </div>
       </div>
-      {/* <div className="show-filter">{showFilter ? <Filter /> : null}</div> */}
+      <div className="show-filter">{showFilter ? <Filter /> : null}</div>
 
       <div className="card-structure">
         {jobData.map((item) => (
