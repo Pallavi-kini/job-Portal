@@ -1,77 +1,67 @@
 import React, { useState } from "react";
 import "./Filter.css";
 
-const Filter = () => {
-  const [filter, setfilter] = useState({
-    companyName: "",
-    location: "",
-    experience: "",
-    role: "",
-  });
-
+const Filter = (props) => {
   const handleInputChange = (event) => {
-    const { name, value } = event.target;
-    setfilter((prevFilters) => ({
-      ...prevFilters,
-      [name]: value,
-    }));
+    props.handleInputChange(event);
   };
 
   const handleSubmit = (e) => {
-    console.log(e);
     e.preventDefault();
-    console.log(filter);
+    props.handleSubmit();
   };
+
   return (
     <div className="filter">
       <div className="filter-container">
-        <form onSubmit={handleSubmit} className="form">
-          <div>
-            <label htmlFor="company name">Company Name</label>
-            <input
-              type="text"
-              name="companyName"
-              className="input"
-              value={filter.companyName}
-              onChange={handleInputChange}
-            />
+        <h2>Filter</h2>
+        <form onSubmit={handleSubmit}>
+          <div className="form">
+            <div>
+              <label htmlFor="company name">Company Name</label>
+              <input
+                type="text"
+                name="companyName"
+                className="input"
+                value={props.filter.companyName}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="location">Location</label>
+              <input
+                type="text"
+                name="location"
+                className="input"
+                value={props.filter.location}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="experience">Minimum experience</label>
+              <input
+                type="number"
+                name="experience"
+                className="input"
+                value={props.filter.experience}
+                onChange={handleInputChange}
+              />
+            </div>
+            <div>
+              <label htmlFor="role">Designation</label>
+              <input
+                type="text"
+                name="role"
+                className="input"
+                value={props.filter.role}
+                onChange={handleInputChange}
+              />
+            </div>
           </div>
-          <div>
-            <label htmlFor="location">Location</label>
-            <input
-              type="text"
-              name="location"
-              className="input"
-              value={filter.location}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="experience">Minimum experience</label>
-            <input
-              type="number"
-              name="experience"
-              className="input"
-              value={filter.experience}
-              onChange={handleInputChange}
-            />
-          </div>
-          <div>
-            <label htmlFor="role">Designation</label>
-            <input
-              type="text"
-              name="role"
-              className="input"
-              value={filter.role}
-              onChange={handleInputChange}
-            />
-          </div>
-        </form>
-        <div>
           <button type="submit" className="btn-click">
             Apply
           </button>
-        </div>
+        </form>
       </div>
     </div>
   );

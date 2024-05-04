@@ -9,8 +9,13 @@ const Dashboard = () => {
   const [jobData, setjobData] = useState([]);
   const [page, setPage] = useState(1);
   const [showFilter, setshowFilter] = useState(false);
-  const [overlayStyle, setoverlayStyle] = useState(true);
   const [isLoading, setisLoading] = useState(true);
+  const [filter, setfilter] = useState({
+    companyName: "",
+    location: "",
+    experience: "",
+    role: "",
+  });
   var limit = 12;
 
   const url = "https://api.weekday.technology/adhoc/getSampleJdJSON";
@@ -37,8 +42,6 @@ const Dashboard = () => {
     fetchApiData();
     const handleScroll = () => {
       setshowFilter(false);
-      setoverlayStyle(true);
-      console.log("first");
       if (
         window.innerHeight + document.documentElement.scrollHeight + 1 >
         document.documentElement.scrollTop
@@ -46,7 +49,6 @@ const Dashboard = () => {
         setPage((prev) => prev + 1);
       }
     };
-    console.log("stop");
 
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -59,6 +61,31 @@ const Dashboard = () => {
 
   const displayFilter = () => {
     setshowFilter(!showFilter);
+  };
+
+  const handleInputChange = (data) => {
+    const { name, value } = data.target;
+    setfilter((prevFilters) => ({
+      ...prevFilters,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = () => {
+    console.log(jobData);
+    const filteredJobs = jobData.filter((job) => {
+      // return (
+      //   job.minExp >= filter.experience &&
+      //   job.companyName
+      //     .toLowerCase()
+      //     .includes(filter.companyName.toLowerCase()) &&
+      //   job.location.toLowerCase().includes(filter.location.toLowerCase()) &&
+      //   job.techStack.toLowerCase().includes(filter.techStack.toLowerCase()) &&
+      //   job.role.toLowerCase().includes(filter.role.toLowerCase()) &&
+      //   job.basePay >= filter.minBasePay
+      // );
+    });
+    setfilter(filteredJobs);
   };
 
   return (
@@ -80,7 +107,15 @@ const Dashboard = () => {
               <span>Filter</span>
             </div>
           </div>
-          <div className="show-filter">{showFilter ? <Filter /> : null}</div>
+          <div className="show-filter">
+            {showFilter ? (
+              <Filter
+                handleSubmit={handleSubmit}
+                handleInputChange={handleInputChange}
+                filter={filter}
+              />
+            ) : null}
+          </div>
 
           <div className="card-structure">
             {jobData.map((item) => (
@@ -96,12 +131,12 @@ const Dashboard = () => {
                       <span>Posted 10 days ago</span>
                     </div>
                     <div>
-                      <i class="fa-regular fa-bookmark"></i>
+                      <i className="fa-regular fa-bookmark"></i>
                     </div>
                   </div>
                   <div className="company-details">
                     <div>
-                      <img className="logo" src={logo} alt="Logo" />
+                      <img className="logo" src={item.logoUrl} alt="Logo" />
                     </div>
                     <div className="location">
                       <span>{item.companyName}</span>
@@ -115,7 +150,7 @@ const Dashboard = () => {
                     {item.maxJdSalary ? item.maxJdSalary : 100}
                     <span>&#36;</span>
                     <i
-                      class="fa-solid fa-square-check"
+                      className="fa-solid fa-square-check"
                       style={{ color: "#088761" }}
                     ></i>
                   </div>
@@ -139,7 +174,10 @@ const Dashboard = () => {
                   <div className="general-padding">
                     <button type="submit" className="btn-apply">
                       <span>
-                        <i className="fa-solid fa-hourglass-end"></i>
+                        <i
+                          className="fa-solid fa-bolt"
+                          style={{ color: "#FFD43B" }}
+                        ></i>
                       </span>
                       <span>Easy Apply</span>
                     </button>
