@@ -103,13 +103,13 @@ const Dashboard = () => {
       // Include the job only if all conditions match
       return companyNameMatch && locationMatch && roleMatch && experienceMatch;
     });
-    // console.log(filteredJobs);
     setjobData(filteredJobs);
-    if (filteredJobs.length > 0) {
-      setjobData(filteredJobs);
-    } else {
-      fetchApiData();
-    }
+    setshowFilter(false);
+  };
+
+  const clearFilter = () => {
+    setfilter({ companyName: "", location: "", experience: "", role: "" });
+    fetchApiData();
     setshowFilter(false);
   };
 
@@ -177,6 +177,7 @@ const Dashboard = () => {
                 handleSubmit={handleSubmit}
                 handleInputChange={handleInputChange}
                 filter={filter}
+                clearFilter={clearFilter}
               />
             ) : null}
           </div>

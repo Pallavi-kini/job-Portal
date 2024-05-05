@@ -35,3 +35,8 @@ h2 {
   justify-content: center;
   padding-bottom: 10px;
 }
+
+.clear-filter {
+  display: flex;
+  gap: 32px;
+}

@@ -11,11 +11,16 @@ const Filter = (props) => {
     props.handleSubmit();
   };
 
+  const clearFilter = (e) => {
+    e.preventDefault();
+    props.clearFilter();
+  };
+
   return (
     <div className="filter">
       <div className="filter-container">
         <h2>Filter</h2>
-        <form onSubmit={handleSubmit}>
+        <form>
           <div className="form">
             <div>
               <label htmlFor="company name">Company Name</label>
@@ -58,9 +63,14 @@ const Filter = (props) => {
               />
             </div>
           </div>
-          <button type="submit" className="btn-click">
-            Apply
-          </button>
+          <div className="clear-filter">
+            <button type="submit" className="btn-click" onClick={handleSubmit}>
+              Apply
+            </button>
+            <button type="submit" className="btn-click" onClick={clearFilter}>
+              Clear Filter
+            </button>
+          </div>
         </form>
       </div>
     </div>

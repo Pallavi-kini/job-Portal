@@ -42,8 +42,10 @@ const CompanyData = () => {
             </div>
             <div className="location">
               <span>{companyData.companyName}</span>
-              <span>{companyData.jobRole} Engineer</span>
-              <span>{companyData.location}</span>
+              <span style={{ textTransform: "capitalize", fontWeight: "500" }}>
+                {companyData.jobRole} Engineer
+              </span>
+              <span style={{ fontSize: "14px" }}>{companyData.location}</span>
             </div>
           </div>
           <div>
