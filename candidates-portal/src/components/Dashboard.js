@@ -134,7 +134,6 @@ const Dashboard = () => {
   //Navigate to saved item page
 
   const routeToPageSave = () => {
-    console.log("first");
     navigate("savedItem");
   };
 
