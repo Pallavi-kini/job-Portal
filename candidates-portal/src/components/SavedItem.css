@@ -1,0 +1,11 @@
+.no-item {
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.saved-container {
+  min-height: 100vh;
+}
