@@ -9,8 +9,8 @@ Job Portal allows users to view job listings, filter jobs based on various crite
 - Responsive design
 - Featured for mobile screens Deployment
 
-## To install VisualForm, follow these steps:
-
+## Installation
+  To install VisualForm, follow these steps:
 - Clone the repository:
 - Navigate to the project directory:
 - Open your web browser and navigate to http://localhost:3000 to access the application.
