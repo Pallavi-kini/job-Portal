@@ -1,10 +1,9 @@
 import React from "react";
-import "./ReusableCard.css";
 import { useNavigate } from "react-router-dom";
+import "./ReusableCard.css";
 
 const ReusableCard = (props) => {
   const navigate = useNavigate();
-  console.log(props);
 
   const routeToPage = (data) => {
     localStorage.setItem("company", JSON.stringify(data));
@@ -14,6 +13,7 @@ const ReusableCard = (props) => {
   const saveToStore = (data) => {
     props.saveToStore(data);
   };
+
   return (
     <div
       className={
@@ -48,8 +48,12 @@ const ReusableCard = (props) => {
               </div>
               <div className="location">
                 <span>{item.companyName}</span>
-                <span>{item.jobRole} Engineer</span>
-                <span>{item.location}</span>
+                <span
+                  style={{ textTransform: "capitalize", fontWeight: "500" }}
+                >
+                  {item.jobRole} Engineer
+                </span>
+                <span style={{ fontSize: "14px" }}>{item.location}</span>
               </div>
             </div>
             <div>

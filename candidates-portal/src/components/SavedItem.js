@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import "./SavedItem.css";
 import ReusableCard from "./ReusableCard";
-import { add, remove } from "./store/saveSlice";
+import { remove } from "./store/saveSlice";
 import nodata from "../Assets/nodata.jpg";
 import { NavLink } from "react-router-dom";
+import "./SavedItem.css";
 
 const SavedItem = () => {
   const [save, setsave] = useState({});
@@ -15,8 +15,6 @@ const SavedItem = () => {
   useEffect(() => {
     setstoredData(counter);
   }, [counter]);
-  console.log(storedData);
-  console.log(counter);
 
   const removeFromStore = (item) => {
     dispatch(remove(item.jdUid));

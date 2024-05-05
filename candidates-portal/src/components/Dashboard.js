@@ -1,16 +1,14 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import logo from "../Assets/logoc.jpg";
-import "./Dashboard.css";
 import Filter from "./Filter";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { add, remove } from "./store/saveSlice";
 import ReusableCard from "./ReusableCard";
+import "./Dashboard.css";
 
 const Dashboard = () => {
-  const navigate = useNavigate();
   const [jobData, setjobData] = useState([]);
   const [page, setPage] = useState(1);
   const [showFilter, setshowFilter] = useState(false);
@@ -23,10 +21,13 @@ const Dashboard = () => {
     role: "",
   });
   var limit = 12;
+
+  const navigate = useNavigate();
   const dispatch = useDispatch();
 
   const url = "https://api.weekday.technology/adhoc/getSampleJdJSON";
 
+  // API call
   const fetchApiData = () => {
     const request = {
       limit: limit,

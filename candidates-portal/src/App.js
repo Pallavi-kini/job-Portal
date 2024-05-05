@@ -1,14 +1,12 @@
-import { MenuItem } from "@mui/material";
-import "./App.css";
 import CompanyData from "./components/CompanyData";
 import Dashboard from "./components/Dashboard";
-import { Route, BrowserRouter, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import SavedItem from "./components/SavedItem";
+import "./App.css";
 
 function App() {
   return (
     <div className="App">
-      {/* <Menubar></Menubar> */}
       <Routes>
         <Route path="/" element={<Dashboard />}></Route>
         <Route path="company" element={<CompanyData />}></Route>

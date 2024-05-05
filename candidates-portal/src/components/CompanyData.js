@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import "./CompanyData.css";
 import { NavLink } from "react-router-dom";
+import "./CompanyData.css";
 
 const CompanyData = () => {
   const [companyData, setcompanyData] = useState([]);
@@ -9,8 +9,6 @@ const CompanyData = () => {
     const cdata = JSON.parse(localStorage.getItem("company"));
     setcompanyData(cdata);
   }, []);
-
-  console.log(companyData);
 
   return (
     <div className="company-data">
@@ -36,9 +34,6 @@ const CompanyData = () => {
                 <i className="fa-solid fa-hourglass-end"></i>
               </span>
               <span>Posted 10 days ago</span>
-            </div>
-            <div>
-              <i className="fa-regular fa-bookmark"></i>
             </div>
           </div>
           <div className="company-details">
@@ -67,7 +62,7 @@ const CompanyData = () => {
             <div className="general-padding">
               <div>About Us:</div>
               <div className="job-desc">
-                <div className="content">
+                <div className="content-cmpy">
                   {companyData.jobDetailsFromCompany}
                 </div>
               </div>
