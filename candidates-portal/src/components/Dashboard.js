@@ -127,7 +127,7 @@ const Dashboard = () => {
       // Include the job only if all conditions match
       return companyNameMatch && locationMatch && roleMatch && experienceMatch;
     });
-    console.log(filteredJobs);
+    // console.log(filteredJobs);
     setjobData(filteredJobs);
     if (filteredJobs.length > 0) {
       setjobData(filteredJobs);
@@ -137,9 +137,18 @@ const Dashboard = () => {
     setshowFilter(false);
   };
 
-  const routeToPage = () => {
+  // const routeToPage = (item) => {
+  //   // console.log(item);
+  //   console.log("hi");
+  //   // navigate("company");
+  // };
+
+  function routeToPage(data) {
+    // console.log(data);
+    localStorage.setItem("company", JSON.stringify(data));
     navigate("company");
-  };
+    // console.log("clicked");
+  }
 
   return (
     <div className="container">
@@ -218,7 +227,7 @@ const Dashboard = () => {
                         <div className="content overlay">
                           <span
                             style={{ cursor: "pointer" }}
-                            onClick={routeToPage}
+                            onClick={() => routeToPage(item)}
                           >
                             View Job
                           </span>
