@@ -5,6 +5,8 @@ import "./Dashboard.css";
 import Filter from "./Filter";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { add } from "./store/saveSlice";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -19,6 +21,7 @@ const Dashboard = () => {
     role: "",
   });
   var limit = 12;
+  const dispatch = useDispatch();
 
   const url = "https://api.weekday.technology/adhoc/getSampleJdJSON";
 
@@ -150,6 +153,10 @@ const Dashboard = () => {
     // console.log("clicked");
   }
 
+  const saveToStore = (data) => {
+    dispatch(add(data));
+  };
+
   return (
     <div className="container">
       {isLoading ? (
@@ -192,7 +199,10 @@ const Dashboard = () => {
                       </span>
                       <span>Posted 10 days ago</span>
                     </div>
-                    <div>
+                    <div
+                      className="filter-icon"
+                      onClick={() => saveToStore(item)}
+                    >
                       <i className="fa-regular fa-bookmark"></i>
                     </div>
                   </div>

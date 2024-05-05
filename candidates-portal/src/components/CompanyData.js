@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./CompanyData.css";
+import { NavLink } from "react-router-dom";
 
 const CompanyData = () => {
   const [companyData, setcompanyData] = useState([]);
@@ -13,8 +14,19 @@ const CompanyData = () => {
 
   return (
     <div className="company-data">
-      <div style={{ display: "flex", justifyContent: "center" }}>
-        <h2>Company Profile</h2>
+      <div style={{ display: "flex" }}>
+        <div>
+          <NavLink to={"/"}>
+            <span style={{ cursor: "pointer" }}>
+              <i className="fa-solid fa-circle-arrow-left"></i>
+            </span>
+          </NavLink>
+        </div>
+        <div
+          style={{ display: "flex", justifyContent: "center", width: "100%" }}
+        >
+          <h2>Company Profile</h2>
+        </div>
       </div>
       <div className="card" key={companyData.jdUid}>
         <div className="card-details">

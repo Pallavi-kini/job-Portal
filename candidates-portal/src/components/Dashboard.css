@@ -80,12 +80,13 @@
 .menu-content {
   display: flex;
   width: 100%;
-  justify-content: space-around;
   position: fixed;
   overflow: hidden;
   top: 0;
-  background-color: rgb(186, 122, 122);
+  background-color: rgb(188 161 161);
   height: 50px;
+  justify-content: space-between;
+  padding: 26px 36px;
 }
 
 .filter-icon {
