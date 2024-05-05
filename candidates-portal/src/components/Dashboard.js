@@ -6,7 +6,7 @@ import Filter from "./Filter";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { add } from "./store/saveSlice";
+import { add, remove } from "./store/saveSlice";
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -14,6 +14,7 @@ const Dashboard = () => {
   const [page, setPage] = useState(1);
   const [showFilter, setshowFilter] = useState(false);
   const [isLoading, setisLoading] = useState(true);
+  const [save, setsave] = useState({});
   const [filter, setfilter] = useState({
     companyName: "",
     location: "",
@@ -153,8 +154,22 @@ const Dashboard = () => {
     // console.log("clicked");
   }
 
-  const saveToStore = (data) => {
-    dispatch(add(data));
+  const saveToStore = (item) => {
+    if (save[item.jdUid]) {
+      // If item is already saved, delete it
+      dispatch(remove(item.jdUid));
+      setsave((prevItems) => ({
+        ...prevItems,
+        [item.jdUid]: false,
+      }));
+    } else {
+      // If item is not saved, add it
+      dispatch(add(item));
+      setsave((prevItems) => ({
+        ...prevItems,
+        [item.jdUid]: true,
+      }));
+    }
   };
 
   return (
@@ -203,7 +218,13 @@ const Dashboard = () => {
                       className="filter-icon"
                       onClick={() => saveToStore(item)}
                     >
-                      <i className="fa-regular fa-bookmark"></i>
+                      {save[item.jdUid] ? (
+                        <>
+                          <i className="fa-solid fa-bookmark"></i>
+                        </>
+                      ) : (
+                        <i className="fa-regular fa-bookmark"></i>
+                      )}
                     </div>
                   </div>
                   <div className="company-details">
