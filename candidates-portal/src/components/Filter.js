@@ -16,6 +16,8 @@ const Filter = (props) => {
     props.clearFilter();
   };
 
+  console.log("first");
+
   return (
     <div className="filter">
       <div className="filter-container">
